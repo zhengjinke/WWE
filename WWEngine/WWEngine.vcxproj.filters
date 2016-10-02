@@ -5,16 +5,95 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="资源文件">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{1fbd7713-298e-4f4a-985d-cdefd2195196}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\FX">
+      <UniqueIdentifier>{5d3cab08-f2f3-4c98-bebb-ff40c54d97f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="对象">
+      <UniqueIdentifier>{52259a1d-7ff1-43f4-a737-73193f9acd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="世界">
+      <UniqueIdentifier>{a564ccc3-8b93-4dc0-8874-73c733ec838a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="封装">
+      <UniqueIdentifier>{9e3b0817-23f2-461a-a0ba-a2f68890f7c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Prophet.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WWorld.cpp">
+      <Filter>世界</Filter>
+    </ClCompile>
+    <ClCompile Include="WObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WCharactor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="lib.cpp">
+      <Filter>封装</Filter>
+    </ClCompile>
+    <ClCompile Include="skinnedMesh.cpp">
+      <Filter>对象</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WWorld.h">
+      <Filter>世界</Filter>
+    </ClInclude>
+    <ClInclude Include="WObject.h">
+      <Filter>对象</Filter>
+    </ClInclude>
+    <ClInclude Include="WCharactor.h">
+      <Filter>对象</Filter>
+    </ClInclude>
+    <ClInclude Include="WClass.h">
+      <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="WDefine.h">
+      <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="lib.h">
+      <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="skinnedMesh.h">
+      <Filter>对象</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FX\lighting.fx">
+      <Filter>Resources\FX</Filter>
+    </None>
+    <None Include="Resources\meshes\soldier.X">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\meshes\body.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\meshes\face.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\meshes\helmet.jpg">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\meshes\pulserifle.jpg">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>
