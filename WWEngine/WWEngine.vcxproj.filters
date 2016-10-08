@@ -48,7 +48,13 @@
       <Filter>对象</Filter>
     </ClCompile>
     <ClCompile Include="WControllerManager.cpp">
+      <Filter>世界</Filter>
+    </ClCompile>
+    <ClCompile Include="WCamera.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>封装</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +84,12 @@
     </ClInclude>
     <ClInclude Include="WControllerManager.h">
       <Filter>世界</Filter>
+    </ClInclude>
+    <ClInclude Include="WCamera.h">
+      <Filter>对象</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>封装</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

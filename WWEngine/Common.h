@@ -1,6 +1,7 @@
 #pragma once
 #include "WDefine.h"
 #include "WClass.h"
+#include "Input.h"
 #include <string>
 #include "lib.h"
 #include <iostream>

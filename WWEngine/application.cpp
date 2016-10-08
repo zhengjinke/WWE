@@ -36,16 +36,16 @@ class Application
 
 		void SetupCallback();
 		void SetupCallback2();
-
+		void InitInput(HWND hwnd, HINSTANCE hInstance);
 	private:		
-		HWND m_mainWindow;
-		D3DPRESENT_PARAMETERS m_present;
-		bool m_deviceLost;
-
-		SkinnedMesh m_drone;
+		DInputClass*			g_pInput;
+		HWND					m_mainWindow;
+		D3DPRESENT_PARAMETERS	m_present;
+		bool					m_deviceLost;
+		SkinnedMesh				m_drone;
 		ID3DXAnimationController* m_animController;
-		WWorld m_world;
-		float m_deltaTime;
+		WWorld					m_world;
+		float					m_deltaTime;
 };
 
 class CallbackHandler : public ID3DXAnimationCallbackHandler
@@ -222,7 +222,7 @@ HRESULT Application::Init(HINSTANCE hInstance, bool windowed)
 	SetupCallback();
 
 	srand(GetTickCount());
-
+	InitInput(m_mainWindow, hInstance);
 	return S_OK;
 }
 
@@ -311,6 +311,7 @@ void Application::Update(float deltaTime)
 	try
 	{
 		//Check for lost device
+		g_pInput->GetInput();
 		HRESULT coop = g_pDevice->TestCooperativeLevel();
 
 		if(coop != D3D_OK)
@@ -337,11 +338,25 @@ void Application::Update(float deltaTime)
 			m_show -= deltaTime;
 		}
 
+
+
 		//Keyboard input
 		if(KeyDown(VK_ESCAPE))
 		{
 			Quit();
 		}
+
+		if (g_pInput->isKeyDown(DIK_A))		m_world.m_camera->transform.MoveRight(-0.00205f);
+		if (g_pInput->isKeyDown(DIK_D))		m_world.m_camera->transform.MoveRight(0.00205f);
+		if (g_pInput->isKeyDown(DIK_SPACE))	m_world.m_camera->transform.MoveUp(0.00505f);
+		if (g_pInput->isKeyDown(DIK_C))		m_world.m_camera->transform.MoveUp(-0.00505f);
+		if (g_pInput->isKeyDown(DIK_W))		m_world.m_camera->transform.MoveAhead(0.00505f);
+		if (g_pInput->isKeyDown(DIK_S))		m_world.m_camera->transform.MoveAhead(-0.00505f);
+		if (g_pInput->IsMouseButtonDown(1)) {
+			m_world.m_camera->transform.Rotate(-(g_pInput->MouseDy())*-0.0021f, 0, 0);
+			m_world.m_camera->transform.Rotate(0, -(g_pInput->MouseDx())*-0.0021f, 0);
+		}
+
 
 		if(KeyDown(VK_RETURN) && KeyDown(18))		//ALT + RETURN
 		{
@@ -372,16 +387,19 @@ void Application::Render()
 	{
 		try
 		{
+			m_world.SetCamera(g_pDevice, g_pEffect);
 			//Create Matrices
-			D3DXMATRIX identity, world, view, proj;
+			/*D3DXMATRIX identity, world, view, proj;
 			D3DXMatrixIdentity(&identity);
 			D3DXMatrixLookAtLH(&view, &D3DXVECTOR3(0.0f, 1.5f, -3.0f), &D3DXVECTOR3(0.0f, 1.0f, 0.0f), &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
-			D3DXMatrixPerspectiveFovLH(&proj, D3DX_PI / 4.0f, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 1.0f, 1000.0f);
+			D3DXMatrixPerspectiveFovLH(&proj, D3DX_PI / 4.0f, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 1.0f, 1000.0f);*/
 			D3DXVECTOR4 lightPos(-50.0f, 75.0f, -150.0f, 0.0f);
 
-			/*g_pDevice->SetTransform(D3DTS_WORLD, &identity);*/
-			/*g_pDevice->SetTransform(D3DTS_VIEW, &view);
-			g_pDevice->SetTransform(D3DTS_PROJECTION, &proj);*/
+			//m_world.m_camera->matView*m_world.m_camera->proj
+
+			//g_pDevice->SetTransform(D3DTS_WORLD, &identity);
+			g_pDevice->SetTransform(D3DTS_VIEW, &m_world.m_camera->matView);
+			g_pDevice->SetTransform(D3DTS_PROJECTION, &m_world.m_camera->proj);
 
 			// Clear the viewport
 			g_pDevice->Clear(0L, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffffffff, 1.0f, 0L);
@@ -391,13 +409,14 @@ void Application::Render()
 			{	
 				//Render Drone
 				{
-					g_pEffect->SetMatrix("matW", &identity);
-					g_pEffect->SetMatrix("matVP", &(view * proj));
+					g_pEffect->SetMatrix("matVP", &(m_world.m_camera->matView*m_world.m_camera->proj));
+					//g_pEffect->SetMatrix("matW", &identity);
+					//g_pEffect->SetMatrix("matVP", &(view * proj));
 					g_pEffect->SetVector("lightPos", &lightPos);
 
-					m_animController->AdvanceTime(m_deltaTime, &callbackHandler);
-					m_drone.SetPose(identity);
-					m_drone.Render(NULL);
+					//m_animController->AdvanceTime(m_deltaTime, &callbackHandler);
+					//m_drone.SetPose(identity);
+					//m_drone.Render(NULL);
 					m_world.Draw(g_pDevice);
 				}
 
@@ -435,4 +454,11 @@ void Application::Quit()
 {
 	::DestroyWindow(m_mainWindow);
 	::PostQuitMessage(0);
+}
+
+VOID Application::InitInput(HWND hwnd, HINSTANCE hInstance)
+{
+	g_pInput = new DInputClass();
+	g_pInput->Init(hwnd, hInstance, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	return VOID();
 }

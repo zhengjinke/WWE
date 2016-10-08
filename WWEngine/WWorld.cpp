@@ -8,11 +8,13 @@ WWorld::WWorld()
 void WWorld::AddObj(WObject *obj)
 {
 	if (m_freeque.empty()==true) {
+		obj->SetIdx(m_objBuf.size());
 		m_objBuf.push_back(obj);
 	}
 	else {
 		int nfreeidx = m_freeque.top().idx;
 		m_freeque.pop();
+		obj->SetIdx(nfreeidx);
 		m_objBuf[nfreeidx] = obj;
 	}
 }
@@ -36,10 +38,11 @@ bool WWorld::CreateCharactor(char * szFile, char * szName, float x, float y, flo
 	return false;
 }
 
-void WWorld::SetCamera()
+void WWorld::SetCamera(IDirect3DDevice9* g_pDevice, ID3DXEffect* g_pEffect)
 {
 	//完成摄像机类后，用摄像机对象的位置信息来做视口变换和取景变化。
 	//目前该部分放在app.render中实现。
+	m_camera->SetCamera(g_pDevice, g_pEffect);
 }
 
 void WWorld::Draw(IDirect3DDevice9*	g_pDevice)
@@ -48,7 +51,6 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice)
 		messagebox("设备丢失");
 		return;
 	}
-	SetCamera();
 	for (unsigned i = 0; i < m_objBuf.size(); i++) {
 		if (m_objBuf[i] == NULL) continue;
 		m_objBuf[i]->Draw(g_pDevice);
@@ -68,7 +70,14 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice,SkinnedMesh a,D3DMATRIX identity)
 void WWorld::Init()
 {
 	while (!m_freeque.empty())m_freeque.pop();
-	for (int i = 0; i < m_objBuf.size(); i++)if (m_objBuf[i]!=NULL)m_objBuf[i]->Release();
+	for (unsigned i = 0; i < m_objBuf.size(); i++)if (m_objBuf[i]!=NULL)m_objBuf[i]->Release();
 	m_objBuf.clear();
+	m_camera = new WCamera(0.0f, 1.5f, -3.0f);
+}
+
+bool WWorld::Release()
+{
+	m_camera->Release(); delete m_camera;
+	return true;
 }
 
