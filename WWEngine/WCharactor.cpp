@@ -2,11 +2,19 @@
 
 WCharactor::WCharactor(char * szFile, char * szName, float x, float y, float z)
 {
-	cout << szFile << endl;
 	m_mesh.Load(szFile);
 	SetName(szName, sizeof(char)*(strlen(szName)+1));
 	transform.SetPos(x, y, z);
 	SetMatrix();
+	m_mesh.GetAnimations(animations);
+	ShowAnimations();
+}
+
+void WCharactor::ShowAnimations()
+{
+	for (int i = 0; i < animations.size(); i++) {
+		std::cout <<"animation ["<<i<<"] is "<<animations[i] << endl;
+	}
 }
 
 void WCharactor::Draw(IDirect3DDevice9*	g_pDevice)

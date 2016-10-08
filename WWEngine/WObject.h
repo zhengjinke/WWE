@@ -22,11 +22,22 @@ private:
 public:
 	WMATRIX			identity;			// Object世界矩阵
 	WTransform		transform;
-	virtual void Draw(IDirect3DDevice9*	g_pDevice) = 0;			// Object纯虚函数
+	
 	//virtual bool Create() = 0;
+	void SetIdx(unsigned idx);
+	unsigned GetIdx();
+
 	bool SetMatrix();
 	WObject();
 	WObject(float x,float y,float z);	// 创建对象时设置position
 	bool Release() { return true; }
 	bool SetName(char *name,int nNamelen);
+
+
+
+
+	//-------------------------------------------------------------------
+	//								虚函数
+	//-------------------------------------------------------------------
+	virtual void Draw(IDirect3DDevice9*	g_pDevice) = 0;			// Object纯虚函数
 };

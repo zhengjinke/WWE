@@ -1,6 +1,16 @@
 #include "WObject.h"
 
 
+void WObject::SetIdx(unsigned idx)
+{
+	this->idx = idx;
+}
+
+unsigned WObject::GetIdx()
+{
+	return this->idx;
+}
+
 //-----------------------------------------------------------------
 //	bool WObject::SetMatrix()
 //	通过object的transform对象来设置开obj的世界矩阵
@@ -24,11 +34,13 @@ bool WObject::SetMatrix()
 
 WObject::WObject()
 {
+	idx = -1;
 	SetMatrix();
 }
 
 WObject::WObject(float x, float y, float z)
 {
+	idx = -1;
 	transform.position.x = x;
 	transform.position.y = y;
 	transform.position.z = z;

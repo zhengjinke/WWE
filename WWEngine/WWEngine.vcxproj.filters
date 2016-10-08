@@ -35,17 +35,20 @@
     <ClCompile Include="WWorld.cpp">
       <Filter>世界</Filter>
     </ClCompile>
-    <ClCompile Include="WObject.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="WCharactor.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="lib.cpp">
       <Filter>封装</Filter>
     </ClCompile>
     <ClCompile Include="skinnedMesh.cpp">
       <Filter>对象</Filter>
+    </ClCompile>
+    <ClCompile Include="WCharactor.cpp">
+      <Filter>对象</Filter>
+    </ClCompile>
+    <ClCompile Include="WObject.cpp">
+      <Filter>对象</Filter>
+    </ClCompile>
+    <ClCompile Include="WControllerManager.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="skinnedMesh.h">
       <Filter>对象</Filter>
+    </ClInclude>
+    <ClInclude Include="WControllerManager.h">
+      <Filter>世界</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

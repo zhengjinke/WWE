@@ -5,13 +5,7 @@
 #include "WObject.h"
 #include "WCharactor.h"
 class WWorld {
-	struct ObjFreeHashNode {
-		int idx;
-		ObjFreeHashNode(int nidx) :idx(nidx){}
-		bool operator < (const ObjFreeHashNode &rhs)const {
-			return idx > rhs.idx;
-		}
-	};
+	
 	std::vector< WObject* >m_objBuf;					// 世界中的对象指针池
 	std::priority_queue< ObjFreeHashNode >m_freeque;	// 用于查询对象指针池中是否存在被标记为空的位置
 public:

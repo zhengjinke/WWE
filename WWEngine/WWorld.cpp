@@ -49,7 +49,6 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice)
 		return;
 	}
 	SetCamera();
-	std::cout << m_objBuf.size() << endl;
 	for (unsigned i = 0; i < m_objBuf.size(); i++) {
 		if (m_objBuf[i] == NULL) continue;
 		m_objBuf[i]->Draw(g_pDevice);
