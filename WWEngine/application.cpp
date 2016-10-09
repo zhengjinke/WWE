@@ -3,6 +3,7 @@
 #include <fstream>
 #include "skinnedMesh.h"
 #include "WWorld.h"
+#include "WText.h"
 #include <iostream>
 using namespace std;
 
@@ -13,7 +14,7 @@ ID3DXFont*			g_pFont = NULL;
 ID3DXEffect*		g_pEffect = NULL;
 ofstream			g_debug("debug.txt");
 float				m_show = 0.0f;
-
+WText*				g_text = NULL;
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
@@ -46,6 +47,7 @@ class Application
 		ID3DXAnimationController* m_animController;
 		WWorld					m_world;
 		float					m_deltaTime;
+		float					m_startTime;
 };
 
 class CallbackHandler : public ID3DXAnimationCallbackHandler
@@ -87,7 +89,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	MSG msg;
 	memset(&msg, 0, sizeof(MSG));
 	DWORD startTime = GetTickCount(); 
-
 	while(msg.message != WM_QUIT)
 	{
 		if(::PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -223,6 +224,8 @@ HRESULT Application::Init(HINSTANCE hInstance, bool windowed)
 
 	srand(GetTickCount());
 	InitInput(m_mainWindow, hInstance);
+	g_text = new WText(g_pDevice);
+	m_startTime = GetTickCount();
 	return S_OK;
 }
 
@@ -280,7 +283,7 @@ void Application::DeviceLost()
 		g_pFont->OnLostDevice();
 		g_pSprite->OnLostDevice();
 		g_pEffect->OnLostDevice();
-
+		g_text->OnLostDevice();
 		m_deviceLost = true;
 	}
 	catch(...)
@@ -297,7 +300,7 @@ void Application::DeviceGained()
 		g_pFont->OnResetDevice();
 		g_pSprite->OnResetDevice();	
 		g_pEffect->OnResetDevice();
-
+		g_text->OnResetDevice();
 		m_deviceLost = false;
 	}
 	catch(...)
@@ -337,7 +340,6 @@ void Application::Update(float deltaTime)
 		{
 			m_show -= deltaTime;
 		}
-
 
 
 		//Keyboard input
@@ -388,15 +390,13 @@ void Application::Render()
 		try
 		{
 			m_world.SetCamera(g_pDevice, g_pEffect);
+			D3DXVECTOR4 lightPos(-50.0f, 75.0f, -150.0f, 0.0f);
 			//Create Matrices
 			/*D3DXMATRIX identity, world, view, proj;
 			D3DXMatrixIdentity(&identity);
 			D3DXMatrixLookAtLH(&view, &D3DXVECTOR3(0.0f, 1.5f, -3.0f), &D3DXVECTOR3(0.0f, 1.0f, 0.0f), &D3DXVECTOR3(0.0f, 1.0f, 0.0f));
 			D3DXMatrixPerspectiveFovLH(&proj, D3DX_PI / 4.0f, (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 1.0f, 1000.0f);*/
-			D3DXVECTOR4 lightPos(-50.0f, 75.0f, -150.0f, 0.0f);
-
 			//m_world.m_camera->matView*m_world.m_camera->proj
-
 			//g_pDevice->SetTransform(D3DTS_WORLD, &identity);
 			g_pDevice->SetTransform(D3DTS_VIEW, &m_world.m_camera->matView);
 			g_pDevice->SetTransform(D3DTS_PROJECTION, &m_world.m_camera->proj);
@@ -407,19 +407,19 @@ void Application::Render()
 			// Begin the scene 
 			if(SUCCEEDED(g_pDevice->BeginScene()))
 			{	
-				//Render Drone
 				{
 					g_pEffect->SetMatrix("matVP", &(m_world.m_camera->matView*m_world.m_camera->proj));
+					g_pEffect->SetVector("lightPos", &lightPos);
+					m_world.Draw(g_pDevice);
 					//g_pEffect->SetMatrix("matW", &identity);
 					//g_pEffect->SetMatrix("matVP", &(view * proj));
-					g_pEffect->SetVector("lightPos", &lightPos);
-
-					//m_animController->AdvanceTime(m_deltaTime, &callbackHandler);
+					m_animController->AdvanceTime(m_deltaTime, &callbackHandler);
 					//m_drone.SetPose(identity);
 					//m_drone.Render(NULL);
-					m_world.Draw(g_pDevice);
 				}
-
+				char s[50];
+				sprintf(s, " %.0f\n\n %.0f", (GetTickCount()-m_startTime)/1000, (GetTickCount() - m_startTime) / 1000);
+				g_text->Write(0, 0, 200, 200, s, 1);
 				if(m_show > 0.0f)
 				{
 					RECT rc = {0, 0, 800, 600};

@@ -166,6 +166,7 @@
     <ClCompile Include="WCharactor.cpp" />
     <ClCompile Include="WControllerManager.cpp" />
     <ClCompile Include="WObject.cpp" />
+    <ClCompile Include="WText.cpp" />
     <ClCompile Include="WWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClInclude Include="WControllerManager.h" />
     <ClInclude Include="WDefine.h" />
     <ClInclude Include="WObject.h" />
+    <ClInclude Include="WText.h" />
     <ClInclude Include="WWorld.h" />
   </ItemGroup>
   <ItemGroup>

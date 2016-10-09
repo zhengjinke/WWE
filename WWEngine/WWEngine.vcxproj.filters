@@ -56,6 +56,9 @@
     <ClCompile Include="Input.cpp">
       <Filter>封装</Filter>
     </ClCompile>
+    <ClCompile Include="WText.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WWorld.h">
@@ -89,6 +92,9 @@
       <Filter>对象</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
+      <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="WText.h">
       <Filter>封装</Filter>
     </ClInclude>
   </ItemGroup>
