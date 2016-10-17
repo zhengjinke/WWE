@@ -15,8 +15,6 @@ ID3DXEffect*		g_pEffect = NULL;
 ofstream			g_debug("debug.txt");
 float				m_show = 0.0f;
 WText*				g_text = NULL;
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
 
 bool KeyDown(int vk_code){return (GetAsyncKeyState(vk_code) & 0x8000) ? true : false;}
 bool KeyUp(int vk_code){return (GetAsyncKeyState(vk_code) & 0x8000) ? false : true;}
@@ -225,7 +223,7 @@ HRESULT Application::Init(HINSTANCE hInstance, bool windowed)
 	srand(GetTickCount());
 	InitInput(m_mainWindow, hInstance);
 	g_text = new WText(g_pDevice);
-	m_startTime = GetTickCount();
+	m_startTime = (float)GetTickCount();
 	return S_OK;
 }
 

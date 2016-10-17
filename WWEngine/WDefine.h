@@ -4,5 +4,5 @@
 #define	 SAFE_DELETE(p) { if(p){delete(p);(p)=NULL;} }
 
 #define MAX_OBJNAME 50
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 768
