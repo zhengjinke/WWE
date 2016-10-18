@@ -47,7 +47,7 @@ public:
 	bool Release() { return true; }
 	bool SetName(char *name,int nNamelen);
 	char* GetName() { return m_szName; }
-
+	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler) = 0;
 
 	//-------------------------------------------------------------------
 	//								Ðéº¯Êý

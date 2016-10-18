@@ -32,4 +32,6 @@ public:
 	WCharactor(char *szFile, char *szName, float x, float y, float z);
 	void ShowAnimations();
 	virtual void Draw(IDirect3DDevice9*	g_pDevice);
+	void SetupCallBack();
+	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler);
 };

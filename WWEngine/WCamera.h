@@ -16,4 +16,5 @@ public:
 	WCamera(float x,float y,float z);
 	void SetCamera(IDirect3DDevice9* g_pDevice, ID3DXEffect* g_pEffect);
 	virtual void Draw(IDirect3DDevice9*	g_pDevice){}
+	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler){}
 };

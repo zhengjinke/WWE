@@ -5,6 +5,7 @@
 #include "WWorld.h"
 #include "WText.h"
 #include <iostream>
+#include "Common.h"
 using namespace std;
 
 //Global variables
@@ -48,15 +49,7 @@ class Application
 		float					m_startTime;
 };
 
-class CallbackHandler : public ID3DXAnimationCallbackHandler
-{
-	public:
-		HRESULT CALLBACK HandleCallback(THIS_ UINT Track, LPVOID pCallbackData)
-		{
-			m_show = 0.25f;
-			return D3D_OK;
-		}	
-};
+
 
 CallbackHandler callbackHandler;
 
@@ -408,10 +401,11 @@ void Application::Render()
 				{
 					g_pEffect->SetMatrix("matVP", &(m_world.m_camera->matView*m_world.m_camera->proj));
 					g_pEffect->SetVector("lightPos", &lightPos);
+					m_world.UpdateWorld(m_deltaTime, callbackHandler);
 					m_world.Draw(g_pDevice);
 					//g_pEffect->SetMatrix("matW", &identity);
 					//g_pEffect->SetMatrix("matVP", &(view * proj));
-					m_animController->AdvanceTime(m_deltaTime, &callbackHandler);
+					//m_animController->AdvanceTime(m_deltaTime, &callbackHandler);
 					//m_drone.SetPose(identity);
 					//m_drone.Render(NULL);
 				}

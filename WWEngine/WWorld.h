@@ -19,6 +19,7 @@ public:
 	void SetCamera(IDirect3DDevice9* g_pDevice, ID3DXEffect* g_pEffect);
 	void Draw(IDirect3DDevice9*	g_pDevice);
 	void Draw(IDirect3DDevice9*	g_pDevice, SkinnedMesh a, D3DMATRIX identity);
+	void UpdateWorld(float m_deltaTime, CallbackHandler &callbackHandler);
 	void Init();
 	bool Release();
 };

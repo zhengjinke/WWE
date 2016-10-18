@@ -50,13 +50,16 @@
     <ClCompile Include="WControllerManager.cpp">
       <Filter>世界</Filter>
     </ClCompile>
-    <ClCompile Include="WCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>封装</Filter>
     </ClCompile>
     <ClCompile Include="WText.cpp">
+      <Filter>封装</Filter>
+    </ClCompile>
+    <ClCompile Include="WCamera.cpp">
+      <Filter>对象</Filter>
+    </ClCompile>
+    <ClCompile Include="WAnimationController.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,6 +98,9 @@
       <Filter>封装</Filter>
     </ClInclude>
     <ClInclude Include="WText.h">
+      <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="WAnimationController.h">
       <Filter>封装</Filter>
     </ClInclude>
   </ItemGroup>

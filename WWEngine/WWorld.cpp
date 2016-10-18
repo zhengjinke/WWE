@@ -67,6 +67,14 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice,SkinnedMesh a,D3DMATRIX identity)
 	a.Render(NULL);
 }
 
+void WWorld::UpdateWorld(float m_deltaTime, CallbackHandler &callbackHandler)
+{
+	for (unsigned i = 0; i < m_objBuf.size(); i++) {
+		if (m_objBuf[i] == NULL) continue;
+		m_objBuf[i]->Update(m_deltaTime, callbackHandler);
+	}
+}
+
 void WWorld::Init()
 {
 	while (!m_freeque.empty())m_freeque.pop();

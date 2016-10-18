@@ -162,6 +162,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="lib.cpp" />
     <ClCompile Include="skinnedMesh.cpp" />
+    <ClCompile Include="WAnimationController.cpp" />
     <ClCompile Include="WCamera.cpp" />
     <ClCompile Include="WCharactor.cpp" />
     <ClCompile Include="WControllerManager.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="lib.h" />
     <ClInclude Include="skinnedMesh.h" />
+    <ClInclude Include="WAnimationController.h" />
     <ClInclude Include="WCamera.h" />
     <ClInclude Include="WCharactor.h" />
     <ClInclude Include="WClass.h" />
