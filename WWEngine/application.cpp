@@ -6,6 +6,10 @@
 #include "WText.h"
 #include <iostream>
 #include "Common.h"
+
+#include "PxPhysicsAPI.h"
+#include "vehicle/PxVehicleSDK.h"
+
 using namespace std;
 
 //Global variables
@@ -80,6 +84,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 	MSG msg;
 	memset(&msg, 0, sizeof(MSG));
 	DWORD startTime = GetTickCount(); 
+
 	while(msg.message != WM_QUIT)
 	{
 		if(::PeekMessage(&msg, 0, 0, 0, PM_REMOVE))

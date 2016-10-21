@@ -1,4 +1,8 @@
 #pragma once
+
+#include "PxPhysicsAPI.h"
+
+
 #include "WDefine.h"
 #include "WClass.h"
 #include "Input.h"

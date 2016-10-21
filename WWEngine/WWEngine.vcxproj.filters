@@ -24,6 +24,9 @@
     <Filter Include="封装">
       <UniqueIdentifier>{9e3b0817-23f2-461a-a0ba-a2f68890f7c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="封装\PhysX物理">
+      <UniqueIdentifier>{5cc4c275-bfe5-4c15-8d56-9c17c1069be2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Prophet.txt" />
@@ -102,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="WAnimationController.h">
       <Filter>封装</Filter>
+    </ClInclude>
+    <ClInclude Include="PxAllocatorCallback.h">
+      <Filter>封装\PhysX物理</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
