@@ -155,3 +155,12 @@ technique Skinning
         PixelShader  = compile ps_2_0 ps_lighting();        
     }
 }
+
+technique Static 
+{
+	pass P0
+	{
+		Lighting = false;
+	}
+
+};

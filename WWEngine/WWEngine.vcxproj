@@ -71,8 +71,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc12win32;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\vehicle;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\pxtask;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\pvd;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\physxvisualdebuggersdk;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\physxprofilesdk;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\particles;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\gpu;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\geometry;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\foundation;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\extensions;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\cooking;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\common;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\cloth;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include\characterkinematic;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc11win32;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc11win64;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc12win64;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc12win32;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <SourcePath>C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Include;$(SourcePath)</SourcePath>
+    <ReferencePath>C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc11win32;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc11win64;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc12win32;C:\Users\Prophet、\OneDrive\dev\Nvidia_Physx_Master\branches\release\PhysXSDK\Lib\vc12win64;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -174,19 +176,23 @@
     <ClInclude Include="Common.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="lib.h" />
-    <ClInclude Include="PxAllocatorCallback.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="skinnedMesh.h" />
     <ClInclude Include="WAnimationController.h" />
+    <ClInclude Include="WBox.h" />
     <ClInclude Include="WCamera.h" />
     <ClInclude Include="WCharactor.h" />
     <ClInclude Include="WClass.h" />
     <ClInclude Include="WControllerManager.h" />
     <ClInclude Include="WDefine.h" />
     <ClInclude Include="WObject.h" />
+    <ClInclude Include="WPhysXCallBack.h" />
+    <ClInclude Include="WStaticObject.h" />
     <ClInclude Include="WText.h" />
     <ClInclude Include="WWorld.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="Resources\FX\lighting.fx">
       <FileType>Document</FileType>
     </None>

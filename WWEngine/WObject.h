@@ -17,6 +17,7 @@ public:
 		position.x = position.y = position.z = 0.0f;
 		rotation.x = rotation.y = rotation.z = 0.0f;
 		scal.x = scal.y = scal.z = 1.0f;
+		SetMatrix();
 	}
 	void SetPos(float x, float y, float z);
 	void SetRotation(float x, float y, float z);
@@ -36,21 +37,16 @@ private:
 public:
 	
 	WTransform		transform;
-	
-	//virtual bool Create() = 0;
 	void SetIdx(unsigned idx);
 	unsigned GetIdx();
-
-	
 	WObject();
 	WObject(float x,float y,float z);	// 创建对象时设置position
 	bool Release() { return true; }
 	bool SetName(char *name,int nNamelen);
 	char* GetName() { return m_szName; }
-	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler) = 0;
-
 	//-------------------------------------------------------------------
 	//								虚函数
 	//-------------------------------------------------------------------
 	virtual void Draw(IDirect3DDevice9*	g_pDevice) = 0;			// Object纯虚函数
+	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler) = 0;
 };

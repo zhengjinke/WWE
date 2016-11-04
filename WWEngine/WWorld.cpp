@@ -1,8 +1,8 @@
 #include "WWorld.h"
 
-WWorld::WWorld()
+WWorld::WWorld(IDirect3DDevice9 *g_pDevice)
 {
-	Init();
+	Init(g_pDevice);
 }
 
 void WWorld::AddObj(WObject *obj)
@@ -75,17 +75,35 @@ void WWorld::UpdateWorld(float m_deltaTime, CallbackHandler &callbackHandler)
 	}
 }
 
-void WWorld::Init()
+void WWorld::Init(IDirect3DDevice9 *g_pDevice)
 {
 	while (!m_freeque.empty())m_freeque.pop();
 	for (unsigned i = 0; i < m_objBuf.size(); i++)if (m_objBuf[i]!=NULL)m_objBuf[i]->Release();
 	m_objBuf.clear();
 	m_camera = new WCamera(0.0f, 1.5f, -3.0f);
+	m_pDevice = g_pDevice;
 }
 
 bool WWorld::Release()
 {
-	m_camera->Release(); delete m_camera;
+	//注销摄像机
+	m_camera->Release(); 
+	delete m_camera;
+
+	//注销物理
+	mFoundation->release();
+	mProfileZoneManager->release();
+	mPhysics->release();
+	mCooking->release();
+	//PxCloseExtensions();
+
+	//注销对象池中的对象
+	for (int i = 0; i < m_objBuf.size(); i++) {
+		if (m_objBuf[i] == NULL) continue;
+		m_objBuf[i]->Release();
+		delete m_objBuf[i];
+	}
+
 	return true;
 }
 

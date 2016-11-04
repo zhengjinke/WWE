@@ -211,9 +211,11 @@ HRESULT Application::Init(HINSTANCE hInstance, bool windowed)
 		g_debug << (char*)pErrorMsgs->GetBufferPointer() << "\n";
 		return E_FAIL;
 	}
-
+	
 	m_deviceLost = false;
-	m_world.CreateCharactor("resources/meshes/soldier.x", "testSoldier", 0.0f, 0.0f, 0.0f);
+	m_world.Init(g_pDevice);
+	m_world.CreatePhysXBox();
+	//m_world.CreateCharactor("resources/meshes/soldier.x", "testSoldier", 0.0f, 0.0f, 0.0f);
 	//Setup mesh
 	m_drone.Load("resources/meshes/soldier.x");	
 	SetupCallback();
@@ -350,6 +352,10 @@ void Application::Update(float deltaTime)
 		if (g_pInput->isKeyDown(DIK_C))		m_world.m_camera->transform.MoveUp(-0.00505f);
 		if (g_pInput->isKeyDown(DIK_W))		m_world.m_camera->transform.MoveAhead(0.00505f);
 		if (g_pInput->isKeyDown(DIK_S))		m_world.m_camera->transform.MoveAhead(-0.00505f);
+		if (g_pInput->isKeyDown(DIK_P))
+			g_pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+		if (g_pInput->isKeyDown(DIK_O))
+			g_pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 		if (g_pInput->IsMouseButtonDown(1)) {
 			m_world.m_camera->transform.Rotate(-(g_pInput->MouseDy())*-0.0021f, 0, 0);
 			m_world.m_camera->transform.Rotate(0, -(g_pInput->MouseDx())*-0.0021f, 0);
@@ -399,7 +405,7 @@ void Application::Render()
 
 			// Clear the viewport
 			g_pDevice->Clear(0L, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffffffff, 1.0f, 0L);
-
+			
 			// Begin the scene 
 			if(SUCCEEDED(g_pDevice->BeginScene()))
 			{	

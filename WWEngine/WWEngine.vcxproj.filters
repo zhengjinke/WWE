@@ -27,6 +27,9 @@
     <Filter Include="封装\PhysX物理">
       <UniqueIdentifier>{5cc4c275-bfe5-4c15-8d56-9c17c1069be2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="对象\基础模型">
+      <UniqueIdentifier>{ee36c39d-1d40-4385-b94e-1503fe7b332b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Prophet.txt" />
@@ -63,7 +66,7 @@
       <Filter>对象</Filter>
     </ClCompile>
     <ClCompile Include="WAnimationController.cpp">
-      <Filter>源文件</Filter>
+      <Filter>封装</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,8 +109,17 @@
     <ClInclude Include="WAnimationController.h">
       <Filter>封装</Filter>
     </ClInclude>
-    <ClInclude Include="PxAllocatorCallback.h">
+    <ClInclude Include="WPhysXCallBack.h">
       <Filter>封装\PhysX物理</Filter>
+    </ClInclude>
+    <ClInclude Include="WStaticObject.h">
+      <Filter>对象</Filter>
+    </ClInclude>
+    <ClInclude Include="WBox.h">
+      <Filter>对象\基础模型</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>世界</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +129,7 @@
     <None Include="Resources\meshes\soldier.X">
       <Filter>Resources</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\meshes\body.jpg">

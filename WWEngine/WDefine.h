@@ -6,3 +6,8 @@
 #define MAX_OBJNAME 50
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
+
+#define fatalError(info) {\
+	printf("%s", info);\
+	return;\
+}
