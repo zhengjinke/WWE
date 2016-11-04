@@ -27,6 +27,10 @@ class WWorld {
 	/************************************************************************/
 	/* 物理                                                                 */
 	/************************************************************************/
+	const physx::PxVec3						gDefaultGravity = PxVec3(0.0f, -9.8f, 0.0f);
+	static physx::PxDefaultErrorCallback	gDefaultErrorCallback;
+	static physx::PxDefaultAllocator		gDefaultAllocatorCallback;
+
 	physx::PxFoundation*					mFoundation;
 	physx::PxProfileZoneManager*			mProfileZoneManager;
 	physx::PxPhysics*						mPhysics;
@@ -35,9 +39,8 @@ class WWorld {
 	physx::PxCpuDispatcher*					mCpuDispatcher;
 	physx::PxScene*							mScene;
 	physx::PxRigidActor*					mTestActor;
-	static physx::PxDefaultErrorCallback	gDefaultErrorCallback;
-	static physx::PxDefaultAllocator		gDefaultAllocatorCallback;
-
+	physx::PxMaterial*						mPxMtrl;
+	
 	const physx::PxU32						mNbThreads = 1;
 	const bool								recordMemoryAllocations = true;
 	
@@ -82,8 +85,8 @@ public:
 		PxShape* aBoxShape = mTestActor->createShape(PxBoxGeometry(1.0f, 1.0f, 1.0f), *aMaterial);
 		
 	}
-
 	
+
 	physx::PxPhysics* customCreatePhysics(physx::PxU32 version,     // 自定义需要的物理，暂时没有用上
 		physx::PxFoundation& foundation,
 		const physx::PxTolerancesScale& scale,
@@ -102,19 +105,40 @@ public:
 		return physics;
 	}
 
-
-	//mFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, gDefaultAllocatorCallback,
-	//	gDefaultErrorCallback);
-	//if (!mFoundation)
-	//	fatalError("PxCreateFoundation failed!");
 	////////////////////////////////////////////////////////////////////////// //
 
 
 #ifdef PHYSXDEBUG
 public:
+
+	void CreatePhysXFrame() {
+		// Create PhysX Frame World
+		mFoundation = PxCreateFoundation(PX_PHYSICS_VERSION, gDefaultAllocatorCallback, gDefaultErrorCallback);
+		if (!mFoundation) fatalError("PxCreateFoundation failed!");
+
+		mPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, *mFoundation, physx::PxTolerancesScale(), recordMemoryAllocations, mProfileZoneManager);
+		if (!mPhysics) fatalError("PxCreatePhysics failed!");
+
+	}
+
+	void CreatePhysXScene() {
+		mSceneDesc = new physx::PxSceneDesc(mPhysics->getTolerancesScale()); 
+		if (!mSceneDesc) fatalError("new PxSceneDesc failed!");
+		mSceneDesc->gravity = gDefaultGravity;					// 设置默认重力加速度
+		mSceneDesc->broadPhaseType = PxBroadPhaseType::eSAP;		// eSAP 用于只有较少的物体需要进行碰撞检测时使用
+		//mSceneDesc->broadPhaseType = PxBroadPhaseType::eMBP;	// eMBP 用于只有较多的物体需要进行碰撞检测时使用，使用时需要添加世界边界
+		mScene = mPhysics->createScene(*mSceneDesc);
+		if (!mScene) fatalError("new mScene failed!");
+	}
+
+	void CreatePhysXMaterial() {
+		
+	}
+
+
+
 	void CreatePhysXBox() {
 		WStaticObject *obj = new WStaticObject(0.0f,0.0f,0.0f);
-		
 		obj->CreateBox(m_pDevice);
 		AddObj(obj);
 	}
