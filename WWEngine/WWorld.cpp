@@ -51,7 +51,8 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice)
 		messagebox("设备丢失");
 		return;
 	}
-	for (unsigned i = 0; i < m_objBuf.size(); i++) {
+	for (unsigned i = 0; i < m_objBuf.size(); i++) 
+	{
 		if (m_objBuf[i] == NULL) continue;
 		m_objBuf[i]->Draw(g_pDevice);
 	}
@@ -59,7 +60,8 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice)
 
 void WWorld::Draw(IDirect3DDevice9*	g_pDevice,SkinnedMesh a,D3DMATRIX identity)
 {
-	if (g_pDevice == NULL) {
+	if (g_pDevice == NULL) 
+	{
 		messagebox("设备丢失");
 		return;
 	}
@@ -69,7 +71,8 @@ void WWorld::Draw(IDirect3DDevice9*	g_pDevice,SkinnedMesh a,D3DMATRIX identity)
 
 void WWorld::UpdateWorld(float m_deltaTime, CallbackHandler &callbackHandler)
 {
-	for (unsigned i = 0; i < m_objBuf.size(); i++) {
+	for (unsigned i = 0; i < m_objBuf.size(); i++) 
+	{
 		if (m_objBuf[i] == NULL) continue;
 		m_objBuf[i]->Update(m_deltaTime, callbackHandler);
 	}
@@ -98,7 +101,7 @@ bool WWorld::Release()
 	//PxCloseExtensions();
 
 	//注销对象池中的对象
-	for (int i = 0; i < m_objBuf.size(); i++) {
+	for (size_t i = 0; i < m_objBuf.size(); i++) {
 		if (m_objBuf[i] == NULL) continue;
 		m_objBuf[i]->Release();
 		delete m_objBuf[i];
