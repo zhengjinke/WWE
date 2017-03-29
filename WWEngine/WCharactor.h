@@ -26,12 +26,13 @@ class WCharactor : public WObject{
 public:
 	SkinnedMesh						m_mesh;
 	ID3DXAnimationController *		m_aniController;
-	vector<string>					animations;		// assign when load mesh in Constructor;
+	map<string,int>					animations;		// assign when load mesh in Constructor;
 
 	WCharactor();
 	WCharactor(char *szFile, char *szName, float x, float y, float z);
+	void PlayAnimation(char szName[]);
 	void ShowAnimations();
 	virtual void Draw(IDirect3DDevice9*	g_pDevice);
-	void SetupCallBack();
+	void SetupCallBack(unsigned int);
 	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler);
 };

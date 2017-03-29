@@ -336,6 +336,43 @@ void SkinnedMesh::GetAnimations(vector<string> &animations)
 	}
 }
 
+
+void SkinnedMesh::GetAnimations(set<string> &animations)
+{
+	ID3DXAnimationSet *anim = NULL;
+
+	for (int i = 0; i < (int)m_pAnimControl->GetMaxNumAnimationSets(); i++)
+	{
+		anim = NULL;
+		m_pAnimControl->GetAnimationSet(i, &anim);
+
+		if (anim != NULL)
+		{
+			animations.insert(anim->GetName());
+			anim->Release();
+		}
+	}
+}
+
+
+
+void SkinnedMesh::GetAnimations(map<string, int> &animations)
+{
+	ID3DXAnimationSet *anim = NULL;
+
+	for (int i = 0; i < (int)m_pAnimControl->GetMaxNumAnimationSets(); i++)
+	{
+		anim = NULL;
+		m_pAnimControl->GetAnimationSet(i, &anim);
+
+		if (anim != NULL)
+		{
+			animations[anim->GetName()]=i;
+			anim->Release();
+		}
+	}
+}
+
 ID3DXAnimationController* SkinnedMesh::GetController()
 {
 	ID3DXAnimationController* newAnimController = NULL;

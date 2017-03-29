@@ -5,7 +5,8 @@
 #include <d3dx9.h>
 #include <string>
 #include <vector>
-
+#include <set>
+#include <map>
 using namespace std;
 
 struct Bone: public D3DXFRAME
@@ -33,9 +34,10 @@ class SkinnedMesh
 		~SkinnedMesh();
 		void Load(char fileName[]);
 		void Render(Bone *bone);
-
 		void SetPose(D3DXMATRIX world);
 		void GetAnimations(vector<string> &animations);
+		void GetAnimations(set<string> &animations);
+		void GetAnimations(map<string,int> &animations);
 
 		ID3DXAnimationController* GetController();
 

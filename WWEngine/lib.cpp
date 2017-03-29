@@ -55,3 +55,13 @@ float Angle2Radian(float ang) {
 float Radian2Angle(float rad) {
 	return rad / ((2.0f*D3DX_PI) / 360.0f);
 }
+
+std::string charStr2string(char *inp)
+{
+	string _tmp = "";
+	int len = strlen(inp);
+	for (int i = 0; inp[i]!='\0' && i<len ; i++) {
+		_tmp = _tmp + inp[i];
+	}
+	return _tmp;
+}

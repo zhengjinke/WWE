@@ -19,6 +19,7 @@ using namespace physx;
 class WWorld {
 	std::vector< WObject* >m_objBuf;					// 世界中的对象指针池
 	std::priority_queue< ObjFreeHashNode >m_freeque;	// 用于查询对象指针池中是否存在被标记为空的位置
+	std::map<string, int> m_mapName2Index;
 	IDirect3DDevice9*	m_pDevice;
 	ID3DXEffect*		g_pEffect;
 
@@ -27,7 +28,7 @@ class WWorld {
 	/************************************************************************/
 	/* 物理                                                                 */
 	/************************************************************************/
-	const physx::PxVec3						gDefaultGravity = PxVec3(0.0f, -9.8f, 0.0f);
+	const  physx::PxVec3					gDefaultGravity = PxVec3(0.0f, -9.8f, 0.0f);
 	static physx::PxDefaultErrorCallback	gDefaultErrorCallback;
 	static physx::PxDefaultAllocator		gDefaultAllocatorCallback;
 
@@ -73,6 +74,37 @@ public:
 
 		//mPhysics = customCreatePhysics(PX_PHYSICS_VERSION, *mFoundation, physx::PxTolerancesScale(), recordMemoryAllocations, mProfileZoneManager);
 		//if (!mPhysics) fatalError("PxCreatePhysics failed!");
+	}
+
+	static PxRigidActor* createRigidActor(PxScene& scene, PxPhysics& physics,
+		const PxTransform& pose, const PxGeometry& geometry, PxMaterial& material,
+		const PxFilterData* fd, const PxReal* density, const PxReal* mass, PxU32 flags)
+	{
+		const bool isDynamic = (density && *density) || (mass && *mass);
+		PxRigidActor* actor = isDynamic ? static_cast<PxRigidActor*>(physics.createRigidDynamic(pose))
+			: static_cast<PxRigidActor*>(physics.createRigidStatic(pose));
+		if (!actor)
+			return NULL;
+		PxShape* shape = actor->createShape(geometry, material);
+		if (!shape)
+		{
+			actor->release();
+			return NULL;
+		}
+		if (fd)
+			shape->setSimulationFilterData(*fd);
+		if (isDynamic)
+		{
+			PxRigidDynamic* body = static_cast<PxRigidDynamic*>(actor);
+			{
+				if (density)
+					PxRigidBodyExt::updateMassAndInertia(*body, *density);
+				else
+					PxRigidBodyExt::setMassAndUpdateInertia(*body, *mass);
+			}
+		}
+		scene.addActor(*actor);
+		return actor;
 	}
 
 	void CreateTestBox(IDirect3DDevice9* g_pDevice) {
@@ -131,12 +163,6 @@ public:
 		if (!mScene) fatalError("new mScene failed!");
 	}
 
-	void CreatePhysXMaterial() {
-		
-	}
-
-
-
 	void CreatePhysXBox() {
 		WStaticObject *obj = new WStaticObject(0.0f,0.0f,0.0f);
 		obj->CreateBox(m_pDevice);
@@ -146,9 +172,6 @@ public:
 
 #endif
 
-
-
-
 public:
 	WCamera *m_camera;									// 世界中的摄像机
 	WWorld(){}
@@ -156,6 +179,8 @@ public:
 	void AddObj(WObject *obj);							// 将一个对象指针加入对象指针池中
 	bool RemoveObj(int nIdx);
 	bool CreateCharactor(char *szFile, char *szName, float x, float y, float z);
+	int  GetPlayerIndexByName(string szName);
+	WObject * GetPlayerByName(string szName);
 	void SetCamera(IDirect3DDevice9* g_pDevice, ID3DXEffect* g_pEffect);
 	void Draw(IDirect3DDevice9*	g_pDevice);
 	void Draw(IDirect3DDevice9*	g_pDevice, SkinnedMesh a, D3DMATRIX identity);

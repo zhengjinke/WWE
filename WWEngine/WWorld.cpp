@@ -7,16 +7,24 @@ WWorld::WWorld(IDirect3DDevice9 *g_pDevice)
 
 void WWorld::AddObj(WObject *obj)
 {
+	int _index = 0;
 	if (m_freeque.empty()==true) {
 		obj->SetIdx(m_objBuf.size());
 		m_objBuf.push_back(obj);
+		_index = m_objBuf.size() - 1;
 	}
 	else {
 		int nfreeidx = m_freeque.top().idx;
 		m_freeque.pop();
 		obj->SetIdx(nfreeidx);
 		m_objBuf[nfreeidx] = obj;
+		_index = nfreeidx;
 	}
+	string strName = charStr2string(obj->GetName());
+	cout << "strName:" << strName << endl;
+	m_mapName2Index[strName] = _index;
+	//DEBUG
+	cout << "Load Obj " << strName << "  " << _index << endl;
 }
 
 bool WWorld::RemoveObj(int nIdx) 
@@ -35,7 +43,26 @@ bool WWorld::CreateCharactor(char * szFile, char * szName, float x, float y, flo
 {
 	WCharactor *pNewCharactor = new WCharactor(szFile, szName, x, y, z);
 	AddObj(pNewCharactor);
+	
 	return false;
+}
+
+
+int WWorld::GetPlayerIndexByName(string szName)
+{
+	if (m_mapName2Index.find(szName) != m_mapName2Index.end()) {
+		return m_mapName2Index[szName];
+	}
+	return -1;
+}
+
+
+WObject * WWorld::GetPlayerByName(string szName)
+{
+	if (m_mapName2Index.find(szName) != m_mapName2Index.end()) {
+		return this->m_objBuf[m_mapName2Index[szName]];
+	}
+	return NULL;
 }
 
 void WWorld::SetCamera(IDirect3DDevice9* g_pDevice, ID3DXEffect* g_pEffect)
@@ -82,6 +109,7 @@ void WWorld::Init(IDirect3DDevice9 *g_pDevice)
 {
 	while (!m_freeque.empty())m_freeque.pop();
 	for (unsigned i = 0; i < m_objBuf.size(); i++)if (m_objBuf[i]!=NULL)m_objBuf[i]->Release();
+	m_mapName2Index.clear();
 	m_objBuf.clear();
 	m_camera = new WCamera(0.0f, 1.5f, -3.0f);
 	m_pDevice = g_pDevice;

@@ -31,6 +31,7 @@ void DInputClass::GetInput() {
 	HRESULT hr = m_KeyboardDevice->GetDeviceState(sizeof(m_keyBuffer), (void **)&m_keyBuffer);
 	if (hr) {
 		m_KeyboardDevice->Acquire();
+		strcpy(m_LastKeyBuffer, m_keyBuffer);
 		m_KeyboardDevice->GetDeviceState(sizeof(m_keyBuffer), (LPVOID)m_keyBuffer);
 	}
 	hr = m_MouseDevice->GetDeviceState(sizeof(DIMOUSESTATE), (void**)&m_MouseState);
@@ -42,6 +43,13 @@ void DInputClass::GetInput() {
 
 bool DInputClass::isKeyDown(int iKey) {
 	if (m_keyBuffer[iKey] & 0x80)return true;
+	return false;
+}
+
+
+bool DInputClass::isKeyUp(int iKey)
+{
+	if ((m_LastKeyBuffer[iKey] & 0x80) && (!(m_keyBuffer[iKey] & 0x80)))return true;
 	return false;
 }
 

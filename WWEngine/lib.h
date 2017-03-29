@@ -13,3 +13,4 @@ void messagebox(LPCTSTR str);
 void messagebox(LPCTSTR str, LPCTSTR title);
 float Angle2Radian(float ang);
 float Radian2Angle(float rad);
+string charStr2string(char *);

@@ -7,13 +7,26 @@ WCharactor::WCharactor(char * szFile, char * szName, float x, float y, float z)
 	transform.SetPos(x, y, z);
 	m_mesh.GetAnimations(animations);
 	ShowAnimations();
-	SetupCallBack();
+	PlayAnimation("Still");
+}
+
+void WCharactor::PlayAnimation(char szName[])
+{
+	if (animations.find(szName) != animations.end()) {
+		// find this animation
+		this->SetupCallBack(animations[szName]);
+	}
 }
 
 void WCharactor::ShowAnimations()
 {
-	for (unsigned i = 0; i < animations.size(); i++) {
+	/*for (unsigned i = 0; i < animations.size(); i++) {
 		std::cout <<"animation ["<<i<<"] is "<<animations[i] << endl;
+	}*/
+	int i = 0;
+	for (map<string,int>::iterator it = animations.begin(); it != animations.end(); it++) {
+		std::cout << "animation [" << i << "] is "<<it->first<<"  " << it->second << endl;
+		i++;
 	}
 }
 
@@ -27,21 +40,21 @@ void WCharactor::Draw(IDirect3DDevice9*	g_pDevice)
 	m_mesh.Render(NULL);
 }
 
-void WCharactor::SetupCallBack()
+void WCharactor::SetupCallBack(unsigned int nAniIndex)
 {
 		//Get Animation controller
 		m_aniController = m_mesh.GetController();
 
-		//Get the "Aim" Animation set
+		//Get the Animation set
 		ID3DXKeyframedAnimationSet* animSet = NULL;
-		m_aniController->GetAnimationSet(1, (ID3DXAnimationSet**)&animSet);
+		m_aniController->GetAnimationSet(nAniIndex, (ID3DXAnimationSet**)&animSet);
 
 		//Compress the animation set
 		ID3DXBuffer* compressedData = NULL;
 		animSet->Compress(D3DXCOMPRESS_DEFAULT, 0.5f, NULL, &compressedData);
 
 		//Create one callback key
-		UINT numCallbacks = 1;
+		UINT numCallbacks = 0;			// 改成0 暂时不要回调
 		D3DXKEY_CALLBACK keys[1];
 
 		// GetSourceTicksPerSecond() returns the number
@@ -56,6 +69,7 @@ void WCharactor::SetupCallBack()
 
 		// Create the ID3DXCompressedAnimationSet interface
 		// with the callback keys.
+		//animSet->GetPlaybackType()
 		ID3DXCompressedAnimationSet* compressedAnimSet = NULL;
 		D3DXCreateCompressedAnimationSet(animSet->GetName(),
 			animSet->GetSourceTicksPerSecond(),

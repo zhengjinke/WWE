@@ -214,11 +214,11 @@ HRESULT Application::Init(HINSTANCE hInstance, bool windowed)
 	
 	m_deviceLost = false;
 	m_world.Init(g_pDevice);
-	m_world.CreatePhysXBox();
-	//m_world.CreateCharactor("resources/meshes/soldier.x", "testSoldier", 0.0f, 0.0f, 0.0f);
+	//m_world.CreatePhysXBox();
+	m_world.CreateCharactor("resources/meshes/soldier.x", "testSoldier", 0.0f, 0.0f, 0.0f);
 	//Setup mesh
-	m_drone.Load("resources/meshes/soldier.x");	
-	SetupCallback();
+	/*m_drone.Load("resources/meshes/soldier.x");
+	SetupCallback();*/
 
 	srand(GetTickCount());
 	InitInput(m_mainWindow, hInstance);
@@ -350,7 +350,7 @@ void Application::Update(float deltaTime)
 		if (g_pInput->isKeyDown(DIK_D))		m_world.m_camera->transform.MoveRight(0.00205f);
 		if (g_pInput->isKeyDown(DIK_SPACE))	m_world.m_camera->transform.MoveUp(0.00505f);
 		if (g_pInput->isKeyDown(DIK_C))		m_world.m_camera->transform.MoveUp(-0.00505f);
-		if (g_pInput->isKeyDown(DIK_W))		m_world.m_camera->transform.MoveAhead(0.00505f);
+		//if (g_pInput->isKeyDown(DIK_W))		m_world.m_camera->transform.MoveAhead(0.00505f);
 		if (g_pInput->isKeyDown(DIK_S))		m_world.m_camera->transform.MoveAhead(-0.00505f);
 		if (g_pInput->isKeyDown(DIK_P))
 			g_pDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
@@ -360,6 +360,27 @@ void Application::Update(float deltaTime)
 			m_world.m_camera->transform.Rotate(-(g_pInput->MouseDy())*-0.0021f, 0, 0);
 			m_world.m_camera->transform.Rotate(0, -(g_pInput->MouseDx())*-0.0021f, 0);
 		}
+		if (g_pInput->IsMouseButtonDown(0)) {
+			WObject* gotobj = m_world.GetPlayerByName("testSoldier");
+			if (gotobj != NULL) {
+				WCharactor* player = (WCharactor*)gotobj;
+				player->PlayAnimation("Aim");
+			}
+		}
+		if (g_pInput->isKeyDown(DIK_W)) {
+			WObject* gotobj = m_world.GetPlayerByName("testSoldier");
+			if (gotobj != NULL) {
+				WCharactor* player = (WCharactor*)gotobj;
+				player->PlayAnimation("Walk");
+			}
+		}
+		/*if (g_pInput->isKeyUp(DIK_W)) {
+			WObject* gotobj = m_world.GetPlayerByName("testSoldier");
+			if (gotobj != NULL) {
+				WCharactor* player = (WCharactor*)gotobj;
+				player->PlayAnimation("Still");
+			}
+		}*/
 
 
 		if(KeyDown(VK_RETURN) && KeyDown(18))		//ALT + RETURN
