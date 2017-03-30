@@ -28,25 +28,37 @@ public:
 	void Rotate(float x, float y, float z);
 };
 
-
+enum ObjectType {
+	Charactor		= 0,
+	StaticObject	= 1,
+	Camera			= 2,
+//--------------------------------
+	typecount,
+};
 
 class WObject {
 private:
 	unsigned 		idx;
 	char			m_szName[MAX_OBJNAME];
-public:
 	
+public:
+	int				type;
 	WTransform		transform;
-	void SetIdx(unsigned idx);
-	unsigned GetIdx();
+public:
 	WObject();
-	WObject(float x,float y,float z);	// 创建对象时设置position
-	bool Release() { return true; }
-	bool SetName(char *name,int nNamelen);
-	char* GetName() { return m_szName; }
+	WObject(float x, float y, float z);	// 创建对象时设置position
+
+	void		SetIdx(unsigned idx);
+	unsigned	GetIdx();
+	bool		Release() { return true; }
+	bool		SetName(char *name,int nNamelen);
+	char*		GetName() { return m_szName; }
+	int			GetType() { return type; }
 	//-------------------------------------------------------------------
 	//								虚函数
 	//-------------------------------------------------------------------
 	virtual void Draw(IDirect3DDevice9*	g_pDevice) = 0;			// Object纯虚函数
 	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler) = 0;
+	
+	virtual void SetType(ObjectType type) = 0;
 };

@@ -50,4 +50,7 @@ public :
 	}
 	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler) {}
 	void Release() { Mesh->Release(); }
+	void SetType(ObjectType type) {
+		this->type = type;
+	}
 };

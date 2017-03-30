@@ -5,7 +5,6 @@
 #define FOV	 (D3DX_PI / 4.0f)
 class WCamera :public WObject {
 private:
-	
 	VECTOR3 target;
 	VECTOR3 m_upDir;
 	void SetTarget(float x, float y, float z);
@@ -17,4 +16,7 @@ public:
 	void SetCamera(IDirect3DDevice9* g_pDevice, ID3DXEffect* g_pEffect);
 	virtual void Draw(IDirect3DDevice9*	g_pDevice){}
 	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler){}
+	void SetType(ObjectType type) {
+		this->type = type;
+	}
 };

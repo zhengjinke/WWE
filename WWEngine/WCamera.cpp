@@ -2,10 +2,12 @@
 
 WCamera::WCamera()
 {
+	SetType(ObjectType::Camera);
 }
 
 WCamera::WCamera(float x, float y, float z)
 {
+	SetType(ObjectType::Camera);
 	transform.SetPos(x, y, z);
 	m_upDir.x = 0.0f;
 	m_upDir.y = 1.0f;

@@ -28,11 +28,12 @@ public:
 	ID3DXAnimationController *		m_aniController;
 	map<string,int>					animations;		// assign when load mesh in Constructor;
 
-	WCharactor();
+	//WCharactor();
 	WCharactor(char *szFile, char *szName, float x, float y, float z);
 	void PlayAnimation(char szName[]);
 	void ShowAnimations();
 	virtual void Draw(IDirect3DDevice9*	g_pDevice);
 	void SetupCallBack(unsigned int);
 	virtual void Update(float m_deltaTime, CallbackHandler &callbackHandler);
+	void SetType(ObjectType type);
 };

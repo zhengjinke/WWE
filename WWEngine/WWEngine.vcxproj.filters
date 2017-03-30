@@ -18,9 +18,6 @@
     <Filter Include="对象">
       <UniqueIdentifier>{52259a1d-7ff1-43f4-a737-73193f9acd05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="世界">
-      <UniqueIdentifier>{a564ccc3-8b93-4dc0-8874-73c733ec838a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="封装">
       <UniqueIdentifier>{9e3b0817-23f2-461a-a0ba-a2f68890f7c0}</UniqueIdentifier>
     </Filter>
@@ -29,6 +26,9 @@
     </Filter>
     <Filter Include="对象\基础模型">
       <UniqueIdentifier>{ee36c39d-1d40-4385-b94e-1503fe7b332b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="世界">
+      <UniqueIdentifier>{a564ccc3-8b93-4dc0-8874-73c733ec838a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

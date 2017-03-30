@@ -2,6 +2,7 @@
 
 WCharactor::WCharactor(char * szFile, char * szName, float x, float y, float z)
 {
+	SetType(ObjectType::Charactor);
 	m_mesh.Load(szFile);
 	SetName(szName, sizeof(char)*(strlen(szName)+1));
 	transform.SetPos(x, y, z);
@@ -93,4 +94,9 @@ void WCharactor::Update(float m_deltaTime, CallbackHandler &callbackHandler)
 	if (m_aniController) {
 		m_aniController->AdvanceTime(m_deltaTime, &callbackHandler);
 	}
+}
+
+void WCharactor::SetType(ObjectType type)
+{
+	this->type = type;
 }

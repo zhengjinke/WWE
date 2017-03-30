@@ -28,13 +28,13 @@ public:
 
 	void SetDirectionalLight(LPDIRECT3DDEVICE9 device) {
 		::ZeroMemory(&light, sizeof(light));
-		light.Type = D3DLIGHT_DIRECTIONAL; //点光源
+		light.Type = D3DLIGHT_DIRECTIONAL;					//平行光源
 		light.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);	//漫反射光
 		light.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);	//镜面反射光
 		light.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);	//环境光
 		//light.Position = D3DXVECTOR3(0.0f, 200.0f, 0.0f);	//光源位置
 		light.Direction = D3DXVECTOR3(1.0f, 0.0f, 1.0f);	//方向
-		//light.Attenuation0 = 1.0f;							//衰减  ：v = 1/(A0+A1*D+A2+D^2)
+		//light.Attenuation0 = 1.0f;						//衰减  ：v = 1/(A0+A1*D+A2+D^2)
 		//light.Attenuation1 = 0.0f;
 		//light.Attenuation2 = 0.0f;
 		//light.Range = 300.f;								//光照范围
