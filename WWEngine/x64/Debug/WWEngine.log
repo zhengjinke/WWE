@@ -1,0 +1,33 @@
+﻿  WText.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+application.obj : error LNK2019: 无法解析的外部符号 Direct3DCreate9，该符号在函数 "public: long __cdecl Application::Init(struct HINSTANCE__ *,bool)" (?Init@Application@@QEAAJPEAUHINSTANCE__@@_N@Z) 中被引用
+application.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixMultiply，该符号在函数 "public: struct D3DXMATRIX __cdecl D3DXMATRIX::operator*(struct D3DXMATRIX const &)const " (??DD3DXMATRIX@@QEBA?AU0@AEBU0@@Z) 中被引用
+skinnedMesh.obj : error LNK2001: 无法解析的外部符号 D3DXMatrixMultiply
+WObject.obj : error LNK2001: 无法解析的外部符号 D3DXMatrixMultiply
+application.obj : error LNK2019: 无法解析的外部符号 D3DXCreateSprite，该符号在函数 "public: long __cdecl Application::Init(struct HINSTANCE__ *,bool)" (?Init@Application@@QEAAJPEAUHINSTANCE__@@_N@Z) 中被引用
+application.obj : error LNK2019: 无法解析的外部符号 D3DXCreateFontA，该符号在函数 "public: long __cdecl Application::Init(struct HINSTANCE__ *,bool)" (?Init@Application@@QEAAJPEAUHINSTANCE__@@_N@Z) 中被引用
+WText.obj : error LNK2001: 无法解析的外部符号 D3DXCreateFontA
+application.obj : error LNK2019: 无法解析的外部符号 D3DXCreateEffectFromFileA，该符号在函数 "public: long __cdecl Application::Init(struct HINSTANCE__ *,bool)" (?Init@Application@@QEAAJPEAUHINSTANCE__@@_N@Z) 中被引用
+application.obj : error LNK2019: 无法解析的外部符号 D3DXCreateCompressedAnimationSet，该符号在函数 "public: void __cdecl Application::SetupCallback(void)" (?SetupCallback@Application@@QEAAXXZ) 中被引用
+WCharactor.obj : error LNK2001: 无法解析的外部符号 D3DXCreateCompressedAnimationSet
+Input.obj : error LNK2019: 无法解析的外部符号 DirectInput8Create，该符号在函数 "public: long __cdecl DInputClass::Init(struct HWND__ *,struct HINSTANCE__ *,unsigned long,unsigned long)" (?Init@DInputClass@@QEAAJPEAUHWND__@@PEAUHINSTANCE__@@KK@Z) 中被引用
+Input.obj : error LNK2001: 无法解析的外部符号 IID_IDirectInput8A
+Input.obj : error LNK2001: 无法解析的外部符号 GUID_SysMouse
+Input.obj : error LNK2001: 无法解析的外部符号 GUID_SysKeyboard
+Input.obj : error LNK2001: 无法解析的外部符号 c_dfDIMouse
+Input.obj : error LNK2001: 无法解析的外部符号 c_dfDIKeyboard
+skinnedMesh.obj : error LNK2019: 无法解析的外部符号 D3DXCreateTextureFromFileA，该符号在函数 "public: virtual long __cdecl BoneHierarchyLoader::CreateMeshContainer(char const *,struct _D3DXMESHDATA const *,struct _D3DXMATERIAL const *,struct _D3DXEFFECTINSTANCE const *,unsigned long,unsigned long const *,struct ID3DXSkinInfo *,struct _D3DXMESHCONTAINER * *)" (?CreateMeshContainer@BoneHierarchyLoader@@UEAAJPEBDPEBU_D3DXMESHDATA@@PEBU_D3DXMATERIAL@@PEBU_D3DXEFFECTINSTANCE@@KPEBKPEAUID3DXSkinInfo@@PEAPEAU_D3DXMESHCONTAINER@@@Z) 中被引用
+skinnedMesh.obj : error LNK2019: 无法解析的外部符号 D3DXLoadMeshHierarchyFromXA，该符号在函数 "public: void __cdecl SkinnedMesh::Load(char * const)" (?Load@SkinnedMesh@@QEAAXQEAD@Z) 中被引用
+skinnedMesh.obj : error LNK2019: 无法解析的外部符号 D3DXFrameFind，该符号在函数 "public: struct _D3DXFRAME * __cdecl SkinnedMesh::GetBone(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?GetBone@SkinnedMesh@@QEAAPEAU_D3DXFRAME@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+WCamera.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixLookAtLH，该符号在函数 "public: void __cdecl WCamera::SetCamera(struct IDirect3DDevice9 *,struct ID3DXEffect *)" (?SetCamera@WCamera@@QEAAXPEAUIDirect3DDevice9@@PEAUID3DXEffect@@@Z) 中被引用
+WCamera.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixPerspectiveFovLH，该符号在函数 "public: void __cdecl WCamera::SetCamera(struct IDirect3DDevice9 *,struct ID3DXEffect *)" (?SetCamera@WCamera@@QEAAXPEAUIDirect3DDevice9@@PEAUID3DXEffect@@@Z) 中被引用
+WObject.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixScaling，该符号在函数 "public: bool __cdecl WTransform::SetMatrix(void)" (?SetMatrix@WTransform@@QEAA_NXZ) 中被引用
+WObject.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixTranslation，该符号在函数 "public: bool __cdecl WTransform::SetMatrix(void)" (?SetMatrix@WTransform@@QEAA_NXZ) 中被引用
+WObject.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixRotationX，该符号在函数 "public: bool __cdecl WTransform::SetMatrix(void)" (?SetMatrix@WTransform@@QEAA_NXZ) 中被引用
+WObject.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixRotationY，该符号在函数 "public: bool __cdecl WTransform::SetMatrix(void)" (?SetMatrix@WTransform@@QEAA_NXZ) 中被引用
+WObject.obj : error LNK2019: 无法解析的外部符号 D3DXMatrixRotationZ，该符号在函数 "public: bool __cdecl WTransform::SetMatrix(void)" (?SetMatrix@WTransform@@QEAA_NXZ) 中被引用
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d9.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\dinput8.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\dxguid.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+D:\WorldEngine\trunk\x64\Debug\WWEngine.exe : fatal error LNK1120: 22 个无法解析的外部命令

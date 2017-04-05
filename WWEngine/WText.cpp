@@ -33,7 +33,7 @@ void WText::OnResetDevice()
 	g_pFont_Arial_20_THIN->OnResetDevice();
 }
 void WText::Write(int tlx, int tly, int brx, int bry, char *szStr, DWORD nType) {
-	ID3DXFont *font;
+	ID3DXFont *font = NULL;
 	if (nType == 1) font = this->g_pFont_Arial_20_THIN;
 	if (nType == 2) font = this->g_pFont_Arial_20_BOLD;
 	if (nType == 3) font = this->g_pFont_Arial_50_THIN;

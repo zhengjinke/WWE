@@ -120,13 +120,14 @@ bool WWorld::Release()
 	//注销摄像机
 	m_camera->Release(); 
 	delete m_camera;
-
+#ifdef PXPHYSICS_ONLINE
 	//注销物理
 	mFoundation->release();
 	mProfileZoneManager->release();
 	mPhysics->release();
 	mCooking->release();
 	//PxCloseExtensions();
+#endif // PXPHYSICS_ONLINE
 
 	//注销对象池中的对象
 	for (size_t i = 0; i < m_objBuf.size(); i++) {

@@ -6,16 +6,19 @@
 #include "WCharactor.h"
 #include "WStaticObject.h"
 #include "WCamera.h"
+#ifdef PXPHYSICS_ONLINE
 #include <PxDefaultErrorCallback.h>
 #include <Px.h>
 #include <PxDefaultBufferedProfiler.h>
 #include <PxFoundation.h>
 #include "Light.h"
+using namespace physx;
+#endif
 
 //#define PXPHYSICS_ONLINE
 //#define	PHYSXDEBUG
 
-using namespace physx;
+
 class WWorld {
 private:
 	std::vector< WObject* >					m_objBuf;					// 世界中的对象指针池
@@ -23,6 +26,9 @@ private:
 	std::map<string, int>					m_mapName2Index;
 	IDirect3DDevice9*						m_pDevice;
 	ID3DXEffect*							g_pEffect;
+#ifdef  _PHYSX
+
+#endif //  _PHYSX
 
 //PhysX 部分；
 #ifdef PXPHYSICS_ONLINE

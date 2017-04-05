@@ -6,10 +6,10 @@
 #include "WText.h"
 #include <iostream>
 #include "Common.h"
-
+#ifdef PXPHYSICS_ONLINE
 #include "PxPhysicsAPI.h"
 #include "vehicle/PxVehicleSDK.h"
-
+#endif
 using namespace std;
 
 //Global variables

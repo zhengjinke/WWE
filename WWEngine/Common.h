@@ -1,7 +1,7 @@
 #pragma once
 
 
-#define PXPHYSICS_ONLINE
+//#define PXPHYSICS_ONLINE
 #define	PHYSXDEBUG
 
 #include "WDefine.h"
@@ -13,10 +13,10 @@
 #include <vector>
 #include <queue>
 #include <map>
-#include "PxPhysicsAPI.h"
-#include "vehicle/PxVehicleSDK.h"
-
-#include <PxDefaultErrorCallback.h>
+//#include "PxPhysicsAPI.h"
+//#include "vehicle/PxVehicleSDK.h"
+//
+//#include <PxDefaultErrorCallback.h>
 
 
 struct ObjFreeHashNode {
